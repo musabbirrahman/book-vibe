@@ -44,8 +44,8 @@ const NavBar = () => {
           </ul>
         </div>
         <div className="navbar-end gap-2">
-          <button class="btn text-white bg-[#23BE0A] rounded-lg">Sign In</button>
-          <button class="btn text-white bg-[#59C6D2] rounded-lg">Sign Up</button>
+          <button className="btn text-white bg-[#23BE0A] rounded-lg">Sign In</button>
+          <button className="btn text-white bg-[#59C6D2] rounded-lg">Sign Up</button>
         </div>
       </div>
     </div>
