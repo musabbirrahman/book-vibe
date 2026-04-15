@@ -8,8 +8,8 @@ const NavBar = () => {
       <li><NavLink to={'/page-to-read'} className={({isActive})=> isActive? "text-[#23BE0A] font-semibold border-[#23BE0A] border rounded-lg" : ""}>Pages to Read</NavLink></li>
   </>
   return (
-    <div>
-      <div className="navbar bg-base-100 shadow-sm">
+    <div className="md:w-[80%] mx-auto mt-3 md:mt-10">
+      <div className="navbar">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -44,8 +44,8 @@ const NavBar = () => {
           </ul>
         </div>
         <div className="navbar-end gap-2">
-          <button class="btn btn-success text-white bg-[#23BE0A] rounded-">Sign In</button>
-          <button class="btn btn-info text-white rounded-lg">Sign Up</button>
+          <button class="btn text-white bg-[#23BE0A] rounded-lg">Sign In</button>
+          <button class="btn text-white bg-[#59C6D2] rounded-lg">Sign Up</button>
         </div>
       </div>
     </div>
