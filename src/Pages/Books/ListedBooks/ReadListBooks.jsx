@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
 import { BookContext } from "../../../BookContext/BookProvider";
+import { Link } from "react-router";
 
 const ReadListBooks = () => {
   const { storedBook } = useContext(BookContext);
-  
+
   return (
     <div>
-      
       {storedBook.map((book, index) => (
         <div
           key={index}
@@ -28,13 +28,17 @@ const ReadListBooks = () => {
 
             <div className="flex flex-wrap items-center gap-4 mb-4 text-sm">
               <span className="font-bold text-gray-900">Tag</span>
-              
+
               {/* Added .map and changed { } to ( ) for implicit return */}
-              {book.tags && book.tags.map((tag, tagIndex) => (
-                <span key={tagIndex} className="px-3 py-1 bg-green-50 text-green-600 font-medium rounded-full">
-                  {tag}
-                </span>
-              ))}
+              {book.tags &&
+                book.tags.map((tag, tagIndex) => (
+                  <span
+                    key={tagIndex}
+                    className="px-3 py-1 bg-green-50 text-green-600 font-medium rounded-full"
+                  >
+                    {tag}
+                  </span>
+                ))}
 
               <div className="flex items-center gap-2 text-gray-500 ml-2">
                 <svg
@@ -57,7 +61,7 @@ const ReadListBooks = () => {
                     d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
                   ></path>
                 </svg>
-               
+
                 <span>{book.yearOfPublishing}</span>
               </div>
             </div>
@@ -78,7 +82,7 @@ const ReadListBooks = () => {
                     d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"
                   ></path>
                 </svg>
-                
+
                 <span>{book.publisher}</span>
               </div>
               <div className="flex items-center gap-2">
@@ -96,7 +100,7 @@ const ReadListBooks = () => {
                     d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
                   ></path>
                 </svg>
-                
+
                 <span>{book.totalPages}</span>
               </div>
             </div>
@@ -110,9 +114,11 @@ const ReadListBooks = () => {
               <span className="px-4 py-2 bg-orange-50 text-orange-500 rounded-full text-sm font-medium">
                 Rating: {book.rating}
               </span>
-              <button className="px-6 py-2 bg-green-500 hover:bg-green-600 transition-colors text-white rounded-full text-sm font-semibold ml-auto">
-                View Details
-              </button>
+              <Link to={`/bookDetails/${book.bookId}`}>
+                <button className="px-6 py-2 bg-green-500 hover:bg-green-600 transition-colors text-white rounded-full text-sm font-semibold ml-auto">
+                  View Details
+                </button>
+              </Link>
             </div>
           </div>
         </div>
