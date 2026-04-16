@@ -5,7 +5,7 @@ const bookPromise = fetch("/public/booksData.json").then((res) => res.json());
 
 const AllBooks = () => {
   const BookData = use(bookPromise);
-  console.log(BookData);
+  
   return (
     <div className="mt-10 md:mt-20 w-[95%] md:w-[80%] mx-auto">
       <h2 className="font-bold text-3xl md:text-4xl text-center">Books</h2>
