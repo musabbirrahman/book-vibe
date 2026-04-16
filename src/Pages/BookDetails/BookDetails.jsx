@@ -2,14 +2,15 @@ import React, { use, useContext } from "react";
 import { useParams } from "react-router";
 import { BookContext } from "../../BookContext/BookProvider";
 
-const bookPromise = fetch("/public/booksData.json").then((res) => res.json());
+const bookPromise = fetch("/booksData.json").then((res) => res.json());
 
 const BookDetails = () => {
   const bookDetails = use(bookPromise);
   const { id } = useParams();
   const expectedBook = bookDetails.find((book) => book.bookId == id);
 
-  const {handleMarkAsRead} = useContext(BookContext)
+  const {handleMarkAsRead} = useContext(BookContext);
+  const {handleWishList} = useContext(BookContext);
 
   return (
     <div className="">
@@ -73,7 +74,7 @@ const BookDetails = () => {
               <button onClick={()=> handleMarkAsRead(expectedBook)} className="px-7 py-3 border border-gray-300 rounded-lg font-semibold text-gray-900 hover:bg-gray-50 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-offset-2">
                 Mark as Read
               </button>
-              <button className="px-7 py-3 bg-cyan-400 text-white rounded-lg font-semibold hover:bg-cyan-500 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2">
+              <button onClick={()=> handleWishList(expectedBook)} className="px-7 py-3 bg-cyan-400 text-white rounded-lg font-semibold hover:bg-cyan-500 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2">
                 Add to Wishlist
               </button>
             </div>
