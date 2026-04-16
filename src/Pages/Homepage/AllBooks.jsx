@@ -1,7 +1,7 @@
 import React, { use } from "react";
 import BookCard from "../Books/BookCard";
 
-const bookPromise = fetch("/public/booksData.json").then((res) => res.json());
+const bookPromise = fetch("/booksData.json").then((res) => res.json());
 
 const AllBooks = () => {
   const BookData = use(bookPromise);
