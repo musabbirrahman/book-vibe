@@ -5,6 +5,17 @@ import { Link } from "react-router";
 const ReadListBooks = () => {
   const { storedBook } = useContext(BookContext);
 
+  if (storedBook.length === 0) {
+    return (
+      <div className="flex flex-col items-center justify-center p-12 mt-8 bg-gray-50 border-2 border-dashed border-gray-300 rounded-2xl text-center">
+        <h2 className="text-2xl font-bold text-gray-800 mb-2">No Books Added Yet</h2>
+        <p className="text-gray-500 font-medium">
+          You haven't added any books to your read list. Start exploring!
+        </p>
+      </div>
+    );
+  }
+
   return (
     <div>
       {storedBook.map((book, index) => (

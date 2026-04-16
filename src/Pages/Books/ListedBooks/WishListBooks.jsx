@@ -4,6 +4,17 @@ import { Link } from "react-router";
 
 const WishListBooks = () => {
     const { wishList } = useContext(BookContext);
+
+    if (wishList.length === 0) {
+    return (
+      <div className="flex flex-col items-center justify-center p-12 mt-8 bg-gray-50 border-2 border-dashed border-gray-300 rounded-2xl text-center">
+        <h2 className="text-2xl font-bold text-gray-800 mb-2">No Books Added Yet</h2>
+        <p className="text-gray-500 font-medium">
+          You haven't added any books to your wish list. Start exploring!
+        </p>
+      </div>
+    );
+  }
   return (
     <div>
       {wishList.map((book, index) => (
@@ -28,7 +39,7 @@ const WishListBooks = () => {
             <div className="flex flex-wrap items-center gap-4 mb-4 text-sm">
               <span className="font-bold text-gray-900">Tag</span>
 
-              {/* Added .map and changed { } to ( ) for implicit return */}
+             
               {book.tags &&
                 book.tags.map((tag, tagIndex) => (
                   <span
