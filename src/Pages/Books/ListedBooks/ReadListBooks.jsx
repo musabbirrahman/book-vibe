@@ -1,11 +1,26 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { BookContext } from "../../../BookContext/BookProvider";
 import { Link } from "react-router";
 
-const ReadListBooks = () => {
+const ReadListBooks = ({sortByType}) => {
   const { storedBook } = useContext(BookContext);
 
-  if (storedBook.length === 0) {
+  const [filterReadList, setFilterReadList] = useState(storedBook);
+
+  useEffect(()=>{
+    if(sortByType){
+        if(sortByType === 'pages'){
+            const sortData = [...storedBook].sort((a,b) => a.totalPages - b.totalPages);
+            setFilterReadList(sortData);
+
+        }else if(sortByType === 'rating'){
+             const sortData = [...storedBook].sort((a,b) => a.rating - b.rating);
+            setFilterReadList(sortData);
+        }
+    }
+  }, [sortByType, storedBook])
+
+  if (filterReadList.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center p-12 mt-8 bg-gray-50 border-2 border-dashed border-gray-300 rounded-2xl text-center">
         <h2 className="text-2xl font-bold text-gray-800 mb-2">No Books Added Yet</h2>
@@ -18,7 +33,7 @@ const ReadListBooks = () => {
 
   return (
     <div>
-      {storedBook.map((book, index) => (
+      {filterReadList.map((book, index) => (
         <div
           key={index}
           className="flex flex-col md:flex-row gap-6 p-6 border border-gray-200 rounded-2xl bg-white max-w-4xl w-full mb-6"
@@ -40,7 +55,7 @@ const ReadListBooks = () => {
             <div className="flex flex-wrap items-center gap-4 mb-4 text-sm">
               <span className="font-bold text-gray-900">Tag</span>
 
-              {/* Added .map and changed { } to ( ) for implicit return */}
+              
               {book.tags &&
                 book.tags.map((tag, tagIndex) => (
                   <span

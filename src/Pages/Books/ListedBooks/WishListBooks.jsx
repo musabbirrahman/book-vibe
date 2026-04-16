@@ -1,11 +1,26 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { BookContext } from "../../../BookContext/BookProvider";
 import { Link } from "react-router";
 
-const WishListBooks = () => {
+const WishListBooks = ({sortByType}) => {
     const { wishList } = useContext(BookContext);
 
-    if (wishList.length === 0) {
+    const [filterWishList, setFilterWishList] = useState(wishList);
+    
+      useEffect(()=>{
+        if(sortByType){
+            if(sortByType === 'pages'){
+                const sortData = [...wishList].sort((a,b) => a.totalPages - b.totalPages);
+                setFilterWishList(sortData);
+    
+            }else if(sortByType === 'rating'){
+                 const sortData = [...wishList].sort((a,b) => a.rating - b.rating);
+                setFilterWishList(sortData);
+            }
+        }
+      }, [sortByType, wishList])
+
+    if (filterWishList.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center p-12 mt-8 bg-gray-50 border-2 border-dashed border-gray-300 rounded-2xl text-center">
         <h2 className="text-2xl font-bold text-gray-800 mb-2">No Books Added Yet</h2>
@@ -17,7 +32,7 @@ const WishListBooks = () => {
   }
   return (
     <div>
-      {wishList.map((book, index) => (
+      {filterWishList.map((book, index) => (
         <div
           key={index}
           className="flex flex-col md:flex-row gap-6 p-6 border border-gray-200 rounded-2xl bg-white max-w-4xl w-full mb-6"
